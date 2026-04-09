@@ -78,6 +78,67 @@ We enabled Google Workspace accounts for the infrastructure team and validated t
 
 More on that in the [GitHub issue](https://github.com/rust-lang/infra-team/issues/64).
 
+
+### Triagebot enhancements
+
+Triagebot is our trusty bot incessantly processing workflows on GitHub and on our Zulip chat.
+
+We implemented several notable changes in Q1 2026.
+
+#### GitHub issue comments viewer
+
+We've added to Triagebot a [GitHub issues and PRs viewer](https://github.com/rust-lang/triagebot/pull/2251). It's primarily designed for long issues and PRs where GitHub is unhelpful with its "Load More" button.
+
+It can be accessed via the [`View all comments` link](https://github.com/rust-lang/triagebot/pull/2278) at the top of long issues and PRs.
+
+Example for [triagebot#2251](https://triage.rust-lang.org/gh-comments/rust-lang/triagebot/issues/2251):
+
+<img alt="TriageBot example" src="triagebot-example.png" />
+
+And while it started rather small in its ambitions, it evolved quite a bit over the last quarter with:
+ - a self-contained "Export" button (implemented in [#2274](https://github.com/rust-lang/triagebot/pull/2274))
+ - a table of contents for review threads (implemented in [#2360](https://github.com/rust-lang/triagebot/pull/2360))
+ - expand/collapse thread buttons (implemented in [#2355](https://github.com/rust-lang/triagebot/pull/2355))
+ - and other small improvements
+
+#### Organization-wide default configuration
+
+Triagebot has many features and configurations, and while it's not difficult to enable a feature in a repo (the cost of a PR), it doesn't scale to the size of the rust-lang organization and its >200 repositories.
+
+In order to address the uneven availability of features across all the repositories, we've [added support for organization-wide default configuration](https://github.com/rust-lang/triagebot/pull/2292) in the Triagebot codebase and started enabling some features org-wide.
+
+Announcements of soon-to-be-enabled org-wide features are done in [#**t-infra/announcements>Triagebot Organization-Wide Defaults**](https://rust-lang.zulipchat.com/#narrow/channel/533458-t-infra.2Fannouncements/topic/Triagebot.20Organization-Wide.20Defaults/with/579425485) on Zulip.
+
+#### `user-info` command
+
+This new Zulip command first appeared as [the `comments` command](https://github.com/rust-lang/triagebot/pull/2271) for viewing recent user comments, but [was extended](https://github.com/rust-lang/triagebot/pull/2317) into a more general `user-info` command, which shows recent activity (PRs, repositories) and account creation date for the given GitHub user account.
+
+This is part of our efforts to help reviewers and maintainers with sloppy AI-generated PRs.
+
+#### Per-team rotation mode
+
+Triagebot handles the automatic assignment of reviewers in multiple repositories. Until February, it was not possible to set per-team rotation mode.
+
+This is now possible via the Zulip command `work set-team-rotation-mode <team> off/on`, implemented in [#2273](https://github.com/rust-lang/triagebot/pull/2273) by `@Kobzol`.
+
+#### Per-repository review preferences
+
+Continuing with the theme of reviewer assignments, it was previously only possible to set a review preference for `rust-lang/rust`, despite the multiple repositories handled by Triagebot.
+
+`@Kobzol` fixed that in [#2286](https://github.com/rust-lang/triagebot/pull/2286). It is now possible to [set per-repository review preferences](https://forge.rust-lang.org/triagebot/review-queue-tracking.html#usage).
+
+#### Report banned users to moderator stream on Zulip
+
+As part of supporting different team needs, we've implemented an automatic reporting system on Zulip for banned users in our GitHub organization (implemented in [#2269](https://github.com/rust-lang/triagebot/pull/2269)).
+
+The goal of this feature is to relieve moderators from taking screenshots and manually archiving offending comments and user actions by automatically retrieving that information and posting it in the moderators’ Zulip channel.
+
+#### Clippy's Zulip lint nomination topic
+
+Similar to the previous topic, we've also helped **T-clippy** [set up an automatic FCP topic on Zulip](https://github.com/rust-lang/rust-clippy/pull/16614) when they want to nominate a lint for discussion.
+
+As part of this work, we have also [added the ability to add back a comment on GitHub](https://github.com/rust-lang/triagebot/pull/2334) with the link to the created Zulip topic.
+
 ## Q2 Plans
 
 ### Finish Q1 goals
