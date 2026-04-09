@@ -166,7 +166,7 @@ We have many ideas and we're not sure which ones we will prioritize yet, but her
 - Improve our CI observability by creating dashboards around metrics such as CI jobs duration and failure rate.
 - Improve visibility of the test coverage of the CI jobs.
 
-## Hardware security keys for critical infrastructure access
+### Hardware security keys for critical infrastructure access
 
 We want to secure access to critical Rust infrastructure even further by using hardware security keys. The Rust Foundation partnered with [Yubico](https://www.yubico.com/why-yubico/secure-it-forward/), and we want to provide YubiKeys
 to the Rust teams with access to critical infrastructure.
