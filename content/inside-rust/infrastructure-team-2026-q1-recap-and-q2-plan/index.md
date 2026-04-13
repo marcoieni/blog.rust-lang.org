@@ -139,6 +139,14 @@ Similar to the previous topic, we've also helped **T-clippy** [set up an automat
 
 As part of this work, we have also [added the ability to add back a comment on GitHub](https://github.com/rust-lang/triagebot/pull/2334) with the link to the created Zulip topic.
 
+#### New Zulip commands to handle backports and assign priority to issues
+
+Project members can now use two new Zulip commands to apply labels on on rust-lang/rust issues and pull requests:
+- `backport [stable | beta ] [approve | decline ] <pr #>`: to accept or decline for backport a patch fixing a regression
+- `assign-prio <issue #> [ critical | high | medium | low | <empty>]`: to assign a priority label to an issue (admittedly mostly used by the Compiler Team but it's available to everyone)
+
+For more details, see the [documentation](https://forge.rust-lang.org/triagebot/zulip-commands.html#stream-commands).
+
 ## Q2 Plans
 
 ### Finish Q1 goals
